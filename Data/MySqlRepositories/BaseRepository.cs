@@ -55,13 +55,16 @@ namespace Data.MySqlRepositories
         {
             throw new NotImplementedException();
         }
+        public IEnumerable<TEntity> GetAll()
+        {
+            return entities.ToList();
+        }
 
         public IQueryable<TEntity> Get()
         {
             return entities.AsQueryable();
             //throw new NotImplementedException();
         }
-
         public Task<TEntity> GetAsync(TKey id)
         {
             TEntity result = entities.Find(id);
@@ -83,7 +86,7 @@ namespace Data.MySqlRepositories
             if (entity == null)
             {
                 throw new ArgumentNullException("entity");
-            }
+            } 
             _dbContext.SaveChanges();
             return Task.FromResult(entity);
         }
@@ -102,6 +105,7 @@ namespace Data.MySqlRepositories
         Task DeleteAsync(TEntity entity);
         Task DeleteAsync(Expression<Func<TEntity, bool>> predicate);
         IQueryable<TEntity> Get();
+        IEnumerable<TEntity> GetAll();
         Task<TEntity> GetAsync(TKey id);
         Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> where);
         Task<List<TEntity>> GetAsync(Expression<Func<TEntity, bool>> filter = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, string includeProperties = "");

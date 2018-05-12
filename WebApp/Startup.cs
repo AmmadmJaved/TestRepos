@@ -36,6 +36,8 @@ namespace WebApp
             services.AddTransient<ISecurityService, SecurityService>();
             services.AddTransient<IEmailSender, EmailSender>();
             services.AddTransient<ICategoryRepository, CategoryRepository>();
+            // Add Repository Services
+            //services.AddRepositoryServices(Configuration);
             services.AddMvc();
             // Add Identity Services
             services.AddIdentityServices(Configuration);

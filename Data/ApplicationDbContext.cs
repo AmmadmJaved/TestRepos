@@ -29,5 +29,7 @@ namespace Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Fruit> Fruits { get; set; }
         public DbSet<Vegetable> Vegetables { get; set; }
+        public DbSet<Physician> Physicians { get; set; }
+        public DbSet<PatientUser> PatientUsers { get; set; }
     }
 }

@@ -58,8 +58,6 @@ namespace WebApp.Data.Migrations
                     b.Property<string>("UserName")
                         .HasMaxLength(256);
 
-                    b.Property<string>("name");
-
                     b.HasKey("Id");
 
                     b.HasIndex("NormalizedEmail")
@@ -104,6 +102,70 @@ namespace WebApp.Data.Migrations
                     b.HasIndex("CategoryId");
 
                     b.ToTable("Fruits");
+                });
+
+            modelBuilder.Entity("Data.Model.PatientUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Age");
+
+                    b.Property<string>("ApplicationUserId");
+
+                    b.Property<string>("CNIC");
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("Country");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Gender");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Phone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("PatientUsers");
+                });
+
+            modelBuilder.Entity("Data.Model.Physician", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("ApplicationUserId");
+
+                    b.Property<string>("CNIC");
+
+                    b.Property<string>("City");
+
+                    b.Property<string>("Country");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("Experience");
+
+                    b.Property<string>("Name");
+
+                    b.Property<string>("Phone");
+
+                    b.Property<string>("Qualification");
+
+                    b.Property<int>("RegistrationNo");
+
+                    b.Property<string>("Specialist");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ApplicationUserId");
+
+                    b.ToTable("Physicians");
                 });
 
             modelBuilder.Entity("Data.Model.Vegetable", b =>
@@ -238,6 +300,20 @@ namespace WebApp.Data.Migrations
                     b.HasOne("Data.Model.Category")
                         .WithMany("Fruits")
                         .HasForeignKey("CategoryId");
+                });
+
+            modelBuilder.Entity("Data.Model.PatientUser", b =>
+                {
+                    b.HasOne("Data.ApplicationUser")
+                        .WithMany("PatientUsers")
+                        .HasForeignKey("ApplicationUserId");
+                });
+
+            modelBuilder.Entity("Data.Model.Physician", b =>
+                {
+                    b.HasOne("Data.ApplicationUser")
+                        .WithMany("Physicians")
+                        .HasForeignKey("ApplicationUserId");
                 });
 
             modelBuilder.Entity("Data.Model.Vegetable", b =>

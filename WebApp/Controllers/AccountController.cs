@@ -62,10 +62,11 @@ namespace WebApp.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Login([FromBody]LoginViewModel model, string returnUrl = null)
         {
-           try { 
+            try
+            {
                 var result = await _securityService.LoginAsync(model.Email, model.Password, false);
 
-                    return new ObjectResult(result);
+                return new ObjectResult(result);
 
 
                 //return new BadRequestObjectResult("Signup failed. Please try again.");
@@ -77,6 +78,7 @@ namespace WebApp.Controllers
                 return new BadRequestObjectResult("Something went wrong , please try again.");
             }
         }
+        
 
         [HttpGet]
         [AllowAnonymous]
@@ -202,7 +204,6 @@ namespace WebApp.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
-
         [HttpPost]
         [AllowAnonymous]
         //[ValidateAntiForgeryToken]
@@ -210,7 +211,7 @@ namespace WebApp.Controllers
         {
             try
             {
-                var result = await _securityService.Register(model.Email,model.Email, model.Password, model.ConfirmPassword);
+                var result = await _securityService.Register(model.Email, model.Email, model.Password, model.ConfirmPassword);
                 if (result.Status == LoginStatus.Succeded)
                 {
                     var loginModel = new LoginViewModel
@@ -226,12 +227,13 @@ namespace WebApp.Controllers
 
                 return new ObjectResult(result);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return new BadRequestObjectResult("Something went wrong , please try again.");
             }
-                
+
         }
+
 
         [HttpPost]
         [ValidateAntiForgeryToken]
